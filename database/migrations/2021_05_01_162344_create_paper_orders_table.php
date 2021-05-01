@@ -15,6 +15,12 @@ class CreatePaperOrdersTable extends Migration
     {
         Schema::create('paper_orders', function (Blueprint $table) {
             $table->id();
+            $table->string('vendor_name');
+            $table->string('agent_id');
+            $table->string('vendor_name');
+            $table->string('vendor_name');
+            
+            
 /*
 Vendor Name:		Vendor ID/Number:	
 Sales Agent ID number			
