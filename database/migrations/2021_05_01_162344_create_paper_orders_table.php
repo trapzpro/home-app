@@ -13,8 +13,10 @@ class CreatePaperOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('paper_orders', function (Blueprint $table) {
+        Schema::create('wnsls_paper_orders', function (Blueprint $table) {
             $table->id();
+            $table->string('created_by');
+            
             $table->string('vendor_name');
             $table->string('vendor_ex_id');
             $table->string('agent_empid');
@@ -27,41 +29,37 @@ class CreatePaperOrdersTable extends Migration
             $table->string('cust_cbr');
             $table->string('cust_opt_in');
             $table->string('service_address_line_1');
-            $table->string('service_address_line_2');
-            $table->string('service_address_county');
+            $table->string('service_address_line_2')->nullable();
+            $table->string('service_address_county')->nullable();
             $table->string('service_address_city');
+            $table->string('service_address_state');
             $table->string('service_address_zip');
-            $table->string('install_date');
-            $table->string('cust_existing_tn');
-            $table->string('');
-            $table->string('');
-            $table->string('');
-            $table->string('');
-            
-/*
-Vendor Name:		Vendor ID/Number:	
-Sales Agent ID number			
-Selected Bundle:	Solo or BB/Phone Bundle?	Sale Type:	Consumer/SMB
-Selected_HSI_Speed:		Current Windstream number: (for broadband adds and upgrades)	
-Selected_bundle_adder: Secure/Security/Youtube		Expected Install Date:	
-Customer Name:		Modem Rental:	
-Customer Email:		Complete below if billing address differs from service address:	
-Customer Contact Number:		Billing Address:	
-Text Msg Opt in:		Billing City:	
-Customer  Service Address:		Billing State:	
-County:		Billing Zip Code:	
-City:		Phone Book Name (If listing is requested):	
-State:		Complete below if customer is porting a number:	
-Zip Code:		Current Provider:	Port In Phone No 1:
-Authorized Users:		Current Acct No:	Port In Phone No 2:
-Additional Contact Number:		Current PIN:	
-Referral ID:			
-Lifeline QCODE:			
-Applying for EBB:			
-*/
-
-
-
+            $table->string('service_address_uqual_id')->nullable();
+            $table->string('install_date')->nullable();
+            $table->string('cust_existing_tn')->nullable();
+            $table->string('billing_same_as_service');
+            $table->string('billing_address_line_1')->nullable();
+            $table->string('billing_address_line_2')->nullable();
+            $table->string('billing_address_city')->nullable();
+            $table->string('billing_address_state')->nullable();
+            $table->string('billing_address_zip')->nullable();
+            $table->string('phonebook_name')->nullable();
+            $table->string('port_provider')->nullable();
+            $table->string('port_account_number')->nullable();
+            $table->string('port_in_tn1')->nullable();
+            $table->string('port_in_tn2')->nullable();
+            $table->string('port_pin')->nullable();
+            $table->json('auth_users')->nullable();
+            $table->string('additional_cbr')->nullable();
+            $table->string('referral_id')->nullable();
+            $table->string('lifeline_qcode')->nullable();
+            $table->string('apply_for_ebb')->nullable();
+            $table->string('worked_status')->default('New');
+            $table->boolean('worked');
+            $table->string('so_nmbr')->nullable();
+            $table->string('worked_notes')->nullable();
+            $table->string('worked_by')->nullable();
+            $table->datetime('worked_at')->nullable();
             $table->timestamps();
         });
     }
@@ -73,6 +71,6 @@ Applying for EBB:
      */
     public function down()
     {
-        Schema::dropIfExists('paper_orders');
+        Schema::dropIfExists('wnsls_paper_orders');
     }
 }
